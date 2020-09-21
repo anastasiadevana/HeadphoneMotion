@@ -18,15 +18,17 @@ You can use this to get head tracking data from Apple headphones like AirPods Pr
 
 ## <a name="what-is-this"></a>What is this?
 
-Apple released the new Headphone Motion API in iOS 14, which provides head tracking data from compatible headphones. At this point the only compatible device is AirPods Pro.
-Please note that the data is only 3dof (degrees of freedom), meaning that it only provides the head rotation, but not position.
+Apple released the new Headphone Motion API in iOS 14, which provides head tracking data from compatible headphones. 
+Currently (as of September 2020) the only compatible device is AirPods Pro.
+
+Please note that the data is only 3dof, meaning that it only provides head rotation, but not position.
 
 ---
 
 ## <a name="installation"></a>Installation
 
-1. Clone this repository to your desktop, or download it as a zip.
-1. Put the downloaded `HeadphoneMotion` folder anywhere in your Unity `Assets` folder.
+1. Clone this repository, or download it as a zip.
+1. Rename the downloaded folder to `HeadphoneMotion` and place it anywhere in your Unity project `Assets` folder.
 
 ---
 
@@ -34,28 +36,32 @@ Please note that the data is only 3dof (degrees of freedom), meaning that it onl
 
 In order to verify that the plugin works, it's best to test with the provided example scene.
 
-> What you'll need: 
+> Here is what you will need in order to build and run the example scene:
 > - Unity3D
 > - Xcode version 12 or higher
 > - AirPods Pro running the latest hardware
 > - Apple mobile device running iOS 14
-> - and the ability to sign and install iOS builds (I have confirmed that this functionality works without an Apple Developer account)
+> - Basic knowledge of how to sign and install iOS builds
 
 * Make sure that your project is set to build for iOS. Go to `File > Build Settings...`
     * If `iOS` is not already selected, do select it and click the `Switch Platform` button
 * Add the example scene `HeadphoneMotionExample` to the build, and click `Build and Run`
-* If you haven't already, name your build folder where the `Xcode` project will be saved
-* Make sure your `iOS` device is connected to the computer and unlocked
+* Name your build folder where the `Xcode` project will be saved, and click the `Save` button. This will start the build process.
+* Make sure that your `iOS` device is connected to the computer and unlocked
 
 > If at this point you get a `Code Signing Error`, take care of the signing steps. For the sake of brevity, app signing is outside the scope of these instructions.
 
 On the first build attempt, you will likely get a crash with the following error:
 
 ```
-[access] This app has crashed because it attempted to access privacy-sensitive data without a usage description. 
-The app's Info.plist must contain an NSMotionUsageDescription key with a string value explaining to the user how the app uses this data.
+[access] This app has crashed because it attempted to access privacy-sensitive data 
+without a usage description. The app's Info.plist must contain an NSMotionUsageDescription 
+key with a string value explaining to the user how the app uses this data.
 ```
-In order to fix this, add the `NSMotionUsageDescription` key to the `Info.plist` **in the root folder of the Xcode project** (there may be other `Info.plist` files in the project, but this is the one you want).
+
+What this means is that head tracking data requires a special permission from the user, and you, the developer, must provide a reason to the user as to why they will need to grant this permission.
+
+In order to do that, go to the `Info.plist` **in the root folder of the Xcode project**, add a new key titled `NSMotionUsageDescription`, and in the `Value` field enter the permission text.
 
 ![Add NSMotionUsageDescription Value Gif](https://i.imgur.com/vZVl0Oe.gif)
 
@@ -64,24 +70,27 @@ In order to fix this, add the `NSMotionUsageDescription` key to the `Info.plist`
 
 ![Headphone Motion Example App Screenshot](https://i.imgur.com/Z8bRaRZ.png)
 
-##### Example App Features
+### Example App Features
 
 - `Disable Tracking` / `Enable Tracking` - this button toggles the overall Headphone Motion functionality. Note that if the tracking is disabled, you will not receive headphone connection events.
 - If your device supports the Headphone Motion API, you will see `Headphone motion is available` (otherwise you will see `not available`)
 - `Headphones are connected (or "not connected")` - shows the headphone connection status
 
-**Rotation Calibration**
-You may notice that the "default" rotation of the cube is slightly offset when it starts tracking headpose. This is due to the position of one of the AirPods in your ear. The best way to fix this is to adjust the AirPod position. 
-You can also try to use the `Calibrate starting rotation` button (click it when you feel that you're looking perfectly straight forward). It will try to adjust the rotation based on this calibration, but it will not work well with large offsets. 
+#### Dealing With Rotation Offset
+
+You may notice that the "default" rotation of the cube is slightly offset when it starts tracking headpose. This is due to the position of one of the AirPods in your ear. **The best way to fix this is to adjust the AirPod position in your ear.**
+
+You can also try to use the `Calibrate starting rotation` button (click it when you feel that you're looking perfectly straight forward). The cube rotation will be adjusted based on this calibration, but it **will not work well with large offsets**. 
+
 Click the `Reset calibration` button will reset the calibration value.
 
 ---
 
 ## <a name="how-to-use"></a>How to use
 
-This is the minimum amount of code you need to start using this functionality.
+Here is the minimum amount of code you will need to start using this functionality.
 
-Place this code in some Init function in your script (for example Unity's `Start()` call).
+Place the following code in some instantiation function in your script (for example into Unity's `Start()` call).
 
 ```c#
 
@@ -101,7 +110,8 @@ if (HeadphoneMotion.IsHeadphoneMotionAvailable())
 
 ```
 
-In the same file create the handler function to receive rotation data.
+In the same script, place the function below, which is the handler function that receives the headpose rotation data.
+In this exaple, the received data will be applied to the `GameObject` that this script is attached to.
 
 ```c#
 private void HandleHeadRotationQuaternion(Quaternion rotation)
@@ -117,7 +127,10 @@ Also examine the example scene for some additional usage examples.
 ## <a name="faq"></a>FAQ
 
 - **Is this 3dof or 6dof?**
-    - The API only provides 3dof information
+   - The API only provides 3dof information
+    
+- **Why does the rotation seem "crooked" when my head is perfectly straight?**
+   - This is due to position of one of the AirPod Pros in your ear. Only one headphone is being used for the rotation data. Just wiggle each one to figure out which one is currently being used, and then adjust it until your target object appears straight when your head is straight.
     
 ---
 

@@ -3,7 +3,7 @@
 HeadphoneMotion is a plugin for Unity3d that exposes Apple's Headphone Motion API (<a href="https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager">CMHeadphoneManager</a>) to Unity.
 You can use this to get head tracking data from Apple headphones like AirPods Pro into your Unity scenes.
 
-![Headphone Motion Example Gif](https://i.imgur.com/i3FHrXE.gif)
+![Headphone Motion Example Gif](https://i.imgur.com/dZaAM2G.gif)
 
 ## Table of Contents
 
@@ -57,12 +57,12 @@ The app's Info.plist must contain an NSMotionUsageDescription key with a string 
 ```
 In order to fix this, add the `NSMotionUsageDescription` key to the `Info.plist` **in the root folder of the Xcode project** (there may be other `Info.plist` files in the project, but this is the one you want).
 
-![Add NSMotionUsageDescription Value Gif](https://i.imgur.com/OIDa2S8.gif)
+![Add NSMotionUsageDescription Value Gif](https://i.imgur.com/vZVl0Oe.gif)
 
 * Hit the `Play` button in Xcode to build again, and the project should successfully build and install on your device.
 * If you don't already have your AirPods Pro in, put them on now, and you should see the cube rotating to match your headpose.
 
-![Headphone Motion Example App Screenshot](https://i.imgur.com/3jcVrdE.png
+![Headphone Motion Example App Screenshot](https://i.imgur.com/Z8bRaRZ.png)
 
 ##### Example App Features
 

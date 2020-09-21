@@ -1,6 +1,7 @@
 # Headphone Motion Unity Plugin
 
-HeadphoneMotion is a plugin for Unity3d that exposes Apple's Headphone Motion API (<a href="https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager">CMHeadphoneManager</a>) to Unity.
+HeadphoneMotion is a plugin for Unity3d that exposes Apple's Headphone Motion API (<a href="https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager">CMHeadphoneManager</a>) in Unity.
+
 You can use this to get head tracking data from Apple headphones like AirPods Pro into your Unity scenes.
 
 ![Headphone Motion Example Gif](https://i.imgur.com/dZaAM2G.gif)

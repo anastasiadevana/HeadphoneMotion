@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // HeadphoneMotion - Unity plugin that exposes the CMHeadphoneMotionManager API
-// TODO: Add GitHub link
+// GitHub: https://github.com/anastasiadevana/HeadphoneMotion
 //------------------------------------------------------------------------------
 //
 // MIT License

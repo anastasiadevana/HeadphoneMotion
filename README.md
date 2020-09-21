@@ -91,6 +91,12 @@ Click the `Reset calibration` button will reset the calibration value.
 
 Here is the minimum amount of code you will need to start using this functionality.
 
+Include the `HearXR` namespace by adding the following line of code to the top of your script:
+
+```C#
+using HearXR;
+```
+
 Place the following code in some instantiation function in your script (for example into Unity's `Start()` call).
 
 ```c#
@@ -102,7 +108,7 @@ HeadphoneMotion.Init();
 if (HeadphoneMotion.IsHeadphoneMotionAvailable())
 {
     // Subscribe to the rotation callback.
-    // You can also subsribe to OnHeadRotationRaw event to get the x, y, z, w values as they come from the API.
+    // You can also subscribe to OnHeadRotationRaw event to get the x, y, z, w values as they come from the API.
     HeadphoneMotion.OnHeadRotationQuaternion += HandleHeadRotationQuaternion;
     
     // Start tracking headphone motion.

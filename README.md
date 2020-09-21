@@ -22,14 +22,15 @@ You can use this to get head tracking data from Apple headphones like AirPods Pr
 Apple released the new Headphone Motion API in iOS 14, which provides head tracking data from compatible headphones. 
 Currently (as of September 2020) the only compatible device is AirPods Pro.
 
-Please note that the data is only 3dof, meaning that it only provides head rotation, but not position.
+Please note that Apple's Head Motion API only provides rotational data (3dof), but no positional data.
 
 ---
 
 ## <a name="installation"></a>Installation
 
-1. Clone this repository, or download it as a zip.
-1. Rename the downloaded folder to `HeadphoneMotion` and place it anywhere in your Unity project `Assets` folder.
+**Option 1:** Clone this repository into the `Assets` folder in your Unity project.
+
+**Option 2:** Donwload this repository as a zip, rename the extracted folder to `HeadphoneMotion`, and place it anywhere in your Unity project `Assets` folder.
 
 ---
 
@@ -38,10 +39,10 @@ Please note that the data is only 3dof, meaning that it only provides head rotat
 In order to verify that the plugin works, it's best to test with the provided example scene.
 
 > Here is what you will need in order to build and run the example scene:
-> - Unity3D
+> - Unity3D (tested with version `2019.4.1f1`)
 > - Xcode version 12 or higher
-> - AirPods Pro running the latest hardware
-> - Apple mobile device running iOS 14
+> - AirPods Pro running the latest firmware
+> - Apple mobile device running iOS 14 or greater
 > - Basic knowledge of how to sign and install iOS builds
 
 * Make sure that your project is set to build for iOS. Go to `File > Build Settings...`
@@ -108,7 +109,8 @@ HeadphoneMotion.Init();
 if (HeadphoneMotion.IsHeadphoneMotionAvailable())
 {
     // Subscribe to the rotation callback.
-    // You can also subscribe to OnHeadRotationRaw event to get the x, y, z, w values as they come from the API.
+    // Alternatively, you can subscribe to OnHeadRotationRaw event to get the 
+    // x, y, z, w values as they come from the API.
     HeadphoneMotion.OnHeadRotationQuaternion += HandleHeadRotationQuaternion;
     
     // Start tracking headphone motion.
@@ -134,10 +136,10 @@ Also examine the example scene for some additional usage examples.
 ## <a name="faq"></a>FAQ
 
 - **Is this 3dof or 6dof?**
-   - The API only provides 3dof information
+   - Apple's Headphone Motion API only provides 3dof information
     
 - **Why does the rotation seem "crooked" when my head is perfectly straight?**
-   - This is due to position of one of the AirPod Pros in your ear. Only one headphone is being used for the rotation data. Just wiggle each one to figure out which one is currently being used, and then adjust it until your target object appears straight when your head is straight.
+   - This is likely due to the position of one of the AirPod Pros in your ear. Only one headphone is being used for the rotation data. Just wiggle each one to figure out which one is currently being used, and then adjust it until your target object appears straight when your head is straight.
     
 ---
 
